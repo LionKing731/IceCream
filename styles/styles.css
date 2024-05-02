@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label, .row, button, .prices{
+    margin: 1rem;
+}
+
+.toppingsTable{
+    border: 1px solid black;
+    padding: 0.9rem;
+}
+
+.prices{
+    text-align: right;
+}
+
+button{
+    border-radius: 1rem;
+    padding: 1rem;
+}

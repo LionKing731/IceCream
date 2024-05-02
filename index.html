@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Cream</title>
+    <link href="./styles/styles.css" rel="stylesheet">
+    <script>
+
+        document.addEventListener("DOMContentLoaded", ()=>{
+
+            function updateDisplay(){
+                let cone = document.getElementById("coneElement");
+                let table = document.getElementById("toppingsBox");
+                if(cone.checked){
+                    table.style.display = "none";
+                } else{
+                    table.style.display = "block";
+                }
+            }
+            
+            coneElement.onclick = updateDisplay;
+            cupElement.onclick = updateDisplay;
+
+            
+            submitOrderButton.addEventListener("click", ()=>{
+                const scoops = Number(numScoopsElement.value);
+                const cone = coneElement.checked;
+                const cup = cupElement.checked;
+                const sprinkles = sprinklesElement.checked;
+                const whipped = whippedElement.checked;
+                const fudge = fudgeElement.checked;
+                const cherry = cherryElement.checked;
+
+                let basePrice = 0;
+                let tax = 0;
+                let totalDue = 0;
+
+                basePrice = 2.25;
+                if(scoops > 1){
+                    basePrice += 1.25 * (scoops - 1);
+                }
+
+                if(cup){
+                    if(sprinkles){
+                       basePrice += 0.50;
+                    }
+                    if(whipped){
+                        basePrice += 0.25;
+                    }
+                    if(fudge){
+                        basePrice += 1.25;
+                    }
+                    if(cherry){
+                        basePrice += 0.25;
+                    }
+                }
+                tax = basePrice * .07;
+                totalDue = basePrice + tax;
+
+                basePriceElement.innerText = basePrice.toFixed(2);
+                taxElement.innerText = tax.toFixed(2);
+                totalDueElement.innerText = totalDue.toFixed(2);
+                
+            })
+        })
+    </script>
+</head>
+
+
+<body>
+    <div class = "container">
+
+        <label> Number of Scoops
+            <input type="number" id="numScoopsElement" value="1" min="1" max="4">
+        </label>
+
+        <div class="row">
+            <input type="radio" id="coneElement" name="radio"> Cone
+            <input type="radio" id="cupElement" name="radio"> Cup
+        </div>
+
+        <div id="toppingsBox">
+            <table class="toppingsTable" id="tableToppingsElement">
+                <thead>Toppings</thead>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="sprinklesElement">Sprinkles ($.50)
+                    </td>
+                    <td>
+                        <input type="checkbox" id="whippedElement">Whipped Cream ($0.25)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="fudgeElement">Hot Fudge ($1.25)
+                    </td>
+                    <td>
+                        <input type="checkbox" id="cherryElement"> Cherry ($0.25)
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <button id="submitOrderButton">Submit Order</button>
+
+        <table class="prices">
+            <tr>
+                <td>Base price:</td>
+                <td id="basePriceElement">$</td>
+            </tr>
+            <tr>
+                <td>Tax:</td>
+                <td id="taxElement">$</td>
+            </tr>
+            <tr>
+                <td>Total Due:</td>
+                <td id="totalDueElement">$</td>
+            </tr>
+        </table>
+
+
+
+
+
+
+
+
+
+
+    </div>
+</body>
+
+
+</html>
